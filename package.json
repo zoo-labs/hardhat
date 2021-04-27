@@ -17,20 +17,20 @@
   },
   "homepage": "https://github.com/sushiswap/hardhat-framework#readme",
   "dependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.1",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "chai": "^4.3.0",
+    "chai": "^4.3.4",
     "dotenv": "^8.2.0",
-    "ethereum-waffle": "^3.2.2",
-    "ethers": "^5.0.31",
-    "hardhat": "^2.0.10",
-    "hardhat-deploy": "^0.7.0-beta.44",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.1.4",
+    "hardhat": "^2.2.1",
+    "hardhat-deploy": "^0.7.5",
     "hardhat-gas-reporter": "^1.0.4",
-    "husky": "^5.0.9",
+    "husky": "^6.0.0",
     "prettier": "^2.2.1",
-    "prettier-plugin-solidity": "^1.0.0-beta.5",
+    "prettier-plugin-solidity": "^1.0.0-beta.10",
     "pretty-quick": "^3.1.0",
-    "solc": "0.6.12",    
-    "solidity-coverage": "^0.7.14"
+    "solc": "0.6.12",
+    "solidity-coverage": "^0.7.16"
   }
 }
