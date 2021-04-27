@@ -345,6 +345,7 @@ function addr(address) {
 }
 
 module.exports = {
+    config,
     addr,
     getDomainSeparator,
     getApprovalDigest,

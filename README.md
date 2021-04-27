@@ -13,7 +13,7 @@ All the packages needed are included in this package, so all you need to add in 
         "coverage": "hardhat coverage"
     },
     "devDependencies": {
-        "@sushiswap/hardhat-framework": "sushiswap/hardhat-framework"
+        "@boringcrypto/hardhat-framework": "boringcrypto/hardhat-framework"
     }
 ```
 
@@ -37,17 +37,17 @@ To use the defaults defined in hardhat-framework, change or create the following
 
 **hardhat.config.js**
 ```
-module.exports = require("@sushiswap/hardhat-framework").config.hardhat(require("./settings").hardhat)
+module.exports = require("@boringcrypto/hardhat-framework").config.hardhat(require("./settings").hardhat)
 ```
 
 **.prettierrc.js**
 ```
-module.exports = require("@sushiswap/hardhat-framework").config.prettier(require("./settings").prettier)
+module.exports = require("@boringcrypto/hardhat-framework").config.prettier(require("./settings").prettier)
 ```
 
 **.solcover.js**
 ```
-module.exports = require("@sushiswap/hardhat-framework").config.solcover(require("./settings").solcover)
+module.exports = require("@boringcrypto/hardhat-framework").config.solcover(require("./settings").solcover)
 ```
 
 And add a `settings.js` file:
