@@ -1,6 +1,6 @@
 {
-  "name": "@sushiswap/hardhat-framework",
-  "version": "1.1.5",
+  "name": "@boringcrypto/hardhat-framework",
+  "version": "1.2",
   "description": "Common test utilities for hardhat development",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sushiswap/hardhat-framework.git"
+    "url": "git+https://github.com/boringcrypto/hardhat-framework.git"
   },
   "author": "BoringCrypto, Keno, I'm Software",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sushiswap/hardhat-framework/issues"
+    "url": "https://github.com/boringcrypto/hardhat-framework/issues"
   },
-  "homepage": "https://github.com/sushiswap/hardhat-framework#readme",
+  "homepage": "https://github.com/boringcrypto/hardhat-framework#readme",
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
