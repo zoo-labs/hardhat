@@ -5,10 +5,7 @@ const {
     utils: { keccak256, defaultAbiCoder, toUtf8Bytes, solidityPack },
 } = require("ethers")
 const { ecsign } = require("ethereumjs-util")
-const { BN } = require("bn.js")
-const { KashiPair } = require("./kashipair")
 
-const ADDRESS_ZERO = "0x0000000000000000000000000000000000000000"
 const BASE_TEN = 10
 const PERMIT_TYPEHASH = keccak256(toUtf8Bytes("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)"))
 const BENTOBOX_MASTER_APPROVAL_TYPEHASH = keccak256(
@@ -16,14 +13,6 @@ const BENTOBOX_MASTER_APPROVAL_TYPEHASH = keccak256(
 )
 
 const contracts = {}
-
-function roundBN(number) {
-    return new BN(number.toString()).divRound(new BN("10000000000000000")).toString()
-}
-
-function encodePrice(reserve0, reserve1) {
-    return [reserve1.mul(getBigNumber(1)).div(reserve0), reserve0.mul(getBigNumber(1)).div(reserve1)]
-}
 
 function getDomainSeparator(tokenAddress, chainId) {
     return keccak256(
@@ -105,44 +94,6 @@ async function setMasterContractApproval(bentoBox, from, user, privateKey, maste
             "0x0000000000000000000000000000000000000000000000000000000000000000",
             "0x0000000000000000000000000000000000000000000000000000000000000000"
         )
-}
-
-async function setKashiPairContractApproval(bentoBox, user, privateKey, kashiPair, approved) {
-    const nonce = await bentoBox.nonces(user.address)
-
-    const digest = getBentoBoxApprovalDigest(bentoBox, user, kashiPair.address, approved, nonce, user.provider._network.chainId)
-    const { v, r, s } = ecsign(Buffer.from(digest.slice(2), "hex"), Buffer.from(privateKey.replace("0x", ""), "hex"))
-
-    return await kashiPair.connect(user).setApproval(user.address, approved, v, r, s)
-}
-
-async function kashiPairPermit(bentoBox, token, user, privateKey, kashiPair, amount) {
-    const nonce = await token.nonces(user.address)
-
-    const deadline = (await user.provider._internalBlockNumber).respTime + 10000
-
-    const digest = await getApprovalDigest(
-        token,
-        {
-            owner: user.address,
-            spender: bentoBox.address,
-            value: amount,
-        },
-        nonce,
-        deadline,
-        user.provider._network.chainId
-    )
-    const { v, r, s } = ecsign(Buffer.from(digest.slice(2), "hex"), Buffer.from(privateKey.replace("0x", ""), "hex"))
-
-    return await kashiPair.connect(user).permitToken(token.address, user.address, bentoBox.address, amount, deadline, v, r, s)
-}
-
-function sansBorrowFee(amount) {
-    return amount.mul(BigNumber.from(2000)).div(BigNumber.from(2001))
-}
-
-function sansSafetyAmount(amount) {
-    return amount.sub(BigNumber.from(100000))
 }
 
 async function advanceTimeAndBlock(time, ethers) {
@@ -394,21 +345,15 @@ function addr(address) {
 }
 
 module.exports = {
-    ADDRESS_ZERO,
+    config,
     addr,
     getDomainSeparator,
     getApprovalDigest,
     getApprovalMsg,
     getBentoBoxDomainSeparator,
     getBentoBoxApprovalDigest,
-    kashiPairPermit,
     getSignedMasterContractApprovalData,
     setMasterContractApproval,
-    setKashiPairContractApproval,
-    sansBorrowFee,
-    sansSafetyAmount,
-    encodePrice,
-    roundBN,
     advanceTime,
     advanceBlock,
     advanceTimeAndBlock,
@@ -416,5 +361,4 @@ module.exports = {
     decodeLogs,
     weth,
     createFixture,
-    config
 }
