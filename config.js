@@ -45,7 +45,12 @@ function hardhat(userSettings) {
 
     const { ethers } = require("ethers")
 
-    const test_accounts = {
+    const test_accounts = process.env.MNEMONIC && process.env.FUNDER_MNEMONIC
+    ? [
+        { privateKey: ethers.Wallet.fromMnemonic(process.env.MNEMONIC).privateKey, balance: "9900000000000000000000" }, 
+        { privateKey: ethers.Wallet.fromMnemonic(process.env.FUNDER_MNEMONIC).privateKey, balance: "9900000000000000000000" } 
+    ]
+    : {
         mnemonic: "test test test test test test test test test test test junk",
         accountsBalance: "990000000000000000000",
     }
@@ -60,7 +65,7 @@ function hardhat(userSettings) {
             {
                 blockGasLimit: 10_000_000,
                 chainId: 31337,
-                test_accounts,
+                accounts: test_accounts,
             },
             process.env.ALCHEMY_API_KEY
                 ? { forking: { url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`, blockNumber: 11829739 } }
