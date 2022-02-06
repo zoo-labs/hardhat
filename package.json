@@ -2,6 +2,9 @@
   "name": "@boringcrypto/hardhat-framework",
   "version": "1.2.0",
   "description": "Common test utilities for hardhat development",
+  "bin": {
+    "boring": "./cli.js"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
