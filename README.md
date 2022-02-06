@@ -2,6 +2,12 @@
  
 This package helps configuring a repo for hardhat development. This is very opinionated :)
 
+### Creating a new project
+We will do this using the yarn package manager, starting with:
+
+`yarn init`
+`yarn add --dev boringcrypto/hardhat-framework`
+
 ### How to include this?
 All the packages needed are included in this package, so all you need to add in your repo's `package.json` is:
 
