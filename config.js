@@ -38,10 +38,12 @@ function solcover(userSettings) {
 }
 
 function hardhat(userSettings) {
+    require('@typechain/hardhat')    
     require("@nomiclabs/hardhat-waffle")
     require("hardhat-deploy")
     require("solidity-coverage")
     require("hardhat-gas-reporter")
+    require("./hardhat-flat")
 
     const { ethers } = require("ethers")
 

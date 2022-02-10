@@ -1,27 +1,13 @@
 # hardhat-framework
  
-This package helps configuring a repo for hardhat development. This is very opinionated :)
+This package helps configuring a repo for hardhat development the Boring way. This is very opinionated :)
 
 ### Creating a new project
 We will do this using the yarn package manager, starting with:
 
 `yarn init`
 `yarn add --dev boringcrypto/hardhat-framework`
-
-### How to include this?
-All the packages needed are included in this package, so all you need to add in your repo's `package.json` is:
-
-```
-    "scripts": {
-        "test": "hardhat test",
-        "format": "prettier --write contracts/**/*.sol *.js *.json test/**/*.js",
-        "pretty-quick": "pretty-quick",
-        "coverage": "hardhat coverage"
-    },
-    "devDependencies": {
-        "@boringcrypto/hardhat-framework": "boringcrypto/hardhat-framework"
-    }
-```
+`yarn boring init`
 
 ### Setting up your .env
 You can include your environment variables in a `.env` file in the root of your repo. Alternatively you can set an actual environment variable called `DOTENV_PATH` to point to a central `.env` file to be used. This way you can use the same environment settings accross multiple projects.
@@ -36,39 +22,29 @@ HARDHAT_SHOW_STACK_TRACES=true
 HARDHAT_VERBOSE=true
 ```
 
-### Use default settings for configuration
-Many settings are pre-defined in hardhat-framework. The following changes import all those settings as well as allow you to make any changes/additions to them in a central settings.js file.
+### Goals
+- Compile solidity contracts
+yarn compile
+- Run hardhat as ETH mainnet fork
+yarn hardhat node
 
-To use the defaults defined in hardhat-framework, change or create the following files:
+- Create typescript binding for all contracts
+automatic on compile
 
-**hardhat.config.js**
-```
-module.exports = require("@boringcrypto/hardhat-framework").config.hardhat(require("./settings").hardhat)
-```
+- Run coverage check
+yarn hardhat coverage
 
-**.prettierrc.js**
-```
-module.exports = require("@boringcrypto/hardhat-framework").config.prettier(require("./settings").prettier)
-```
+- Run gas report
 
-**.solcover.js**
-```
-module.exports = require("@boringcrypto/hardhat-framework").config.solcover(require("./settings").solcover)
-```
 
-And add a `settings.js` file:
-```
-module.exports = {
-    hardhat: { },
-    solcover: { },
-    prettier: { }
-}
-```
+- Flatten contracts correctly
+- Handle deployments of flattened contract
+- Verify on Etherscan
+- Auto-run prettier on pre-commit
+- Code completion in tests and scripts
+- Mainnet forking fixed to the block 6 blocks before the current one
 
-TODO:
-
-- Manage deployments
-- Github hooks
-- Getting husky to work properly (pre-commit in package.json)
-- Integrate Certora
-- Integrate Slither
+### Recommended VSCode extentions
+- solidity - Juan Blanco
+- Mocha Test Explorer - Holger Benl
+- Vue Language Features (Volar) - Johnson Chu
