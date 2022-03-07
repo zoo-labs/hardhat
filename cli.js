@@ -12,22 +12,20 @@ async function run(command) {
     }
 }
 
-function makedir(dir) {
-    if (!fs.existsSync(rootPath + dir)){
-        fs.mkdirSync(rootPath + dir);
-    }    
-}
-
-function copy(from, to, overwrite) {
-    if (overwrite || !fs.existsSync(rootPath + to)){
-        fs.copyFileSync(__dirname + from, rootPath + to)
-    }    
-
-}
-
 async function init() {
     const rootPath = require.main.paths[0].split('node_modules')[0];
+    function makedir(dir) {
+        if (!fs.existsSync(rootPath + dir)){
+            fs.mkdirSync(rootPath + dir);
+        }    
+    }
 
+    function copy(from, to, overwrite) {
+        if (overwrite || !fs.existsSync(rootPath + to)){
+            fs.copyFileSync(__dirname + from, rootPath + to)
+        }    
+    }
+    
     makedir(".vscode")
     makedir("contracts")
     makedir("scripts")

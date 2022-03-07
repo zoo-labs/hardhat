@@ -6,6 +6,7 @@ if (process.env.DOTENV_PATH) {
 }
 
 import { HardhatUserConfig, task } from "hardhat/config";
+import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
@@ -36,7 +37,15 @@ const last_block = process.env.ALCHEMY_API_KEY
     : BigNumber.from(0)
 
 const config: HardhatUserConfig = {
-    solidity: "0.8.9",
+    solidity: {
+        version: "0.8.9",
+        settings: {
+            optimizer: {
+                enabled: true,
+                runs: 50000
+            }
+        }
+    },
     networks: {
         hardhat: Object.assign(
         {
